@@ -189,6 +189,20 @@ mixin OSRMHelper {
       );
     }
 
+    String directionInstruction = "";
+    String directionKey = directionFromDegree(step.maneuver.bearingBefore);
+    if (directionKey.isNotEmpty) {
+      var directionConstants =
+          (instructionsV5["constants"] as Map<String, dynamic>)["direction"]
+              as Map<String, dynamic>?;
+      if (directionConstants != null &&
+          directionConstants.containsKey(directionKey)) {
+        directionInstruction = directionConstants[directionKey] as String;
+      } else {
+        directionInstruction = directionKey;
+      }
+    }
+
     return tokenize(instruction, {
       "way_name": name,
       "destination": firstDestination,
