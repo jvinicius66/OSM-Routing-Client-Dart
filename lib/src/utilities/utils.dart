@@ -9,18 +9,19 @@ import 'package:fixnum/fixnum.dart';
 const String oSRMServer = "https://routing.openstreetmap.de";
 const String osmValhallaServer = "https://valhalla1.openstreetmap.de/route";
 const double earthRadius = 6371009;
-typedef TurnByTurnInformation = ({
-  RouteInstruction currentInstruction,
-  RouteInstruction? nextInstruction,
-  double distance,
-});
+typedef TurnByTurnInformation =
+    ({
+      RouteInstruction currentInstruction,
+      RouteInstruction? nextInstruction,
+      double distance,
+    });
 
 enum Languages {
   en("en-US", 'en'),
   es("es-ES", 'es'),
   de("de-DE", 'de'),
   ar("ar-AR", 'ar'),
-  ptBr("pt-BR", 'pt_br');
+  pt("pt-BR", 'pt_br');
 
   const Languages(this.name, this.code);
   final String name;
@@ -225,8 +226,9 @@ extension DecodingExt on String {
 Future<OSRMRoad> parseRoad(ParserRoadComputeArg data) async {
   Map<String, dynamic> jsonResponse = data.json;
   bool alternative = data.alternative;
-  final List<Map<String, dynamic>> routes =
-      List.castFrom(jsonResponse["routes"]);
+  final List<Map<String, dynamic>> routes = List.castFrom(
+    jsonResponse["routes"],
+  );
 
   final route = routes.first;
 
@@ -253,8 +255,9 @@ Future<OSRMRoad> parseRoad(ParserRoadComputeArg data) async {
 /// and this road will not be the shortes route
 Future<OSRMRoad> parseTrip(ParserTripComputeArg data) async {
   Map<String, dynamic> jsonResponse = data.json;
-  final List<Map<String, dynamic>> routes =
-      List.castFrom(jsonResponse["trips"]);
+  final List<Map<String, dynamic>> routes = List.castFrom(
+    jsonResponse["trips"],
+  );
   return OSRMRoad.fromOSRMJson(route: routes.first);
 }
 
