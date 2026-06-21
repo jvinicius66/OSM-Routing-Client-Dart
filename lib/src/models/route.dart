@@ -60,12 +60,16 @@ class RouteInstruction {
   final double duration;
   final String instruction;
   final LngLat location;
+  final String? type;
+  final String? modifier;
 
   const RouteInstruction({
     required this.distance,
     required this.duration,
     required this.instruction,
     required this.location,
+    this.type,
+    this.modifier,
   });
 
   @override

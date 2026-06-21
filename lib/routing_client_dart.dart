@@ -9,5 +9,6 @@ export 'src/models/valhalla/valhalla_response.dart';
 export 'src/routes_services/osrm_service.dart';
 export 'src/routes_services/routing_service.dart';
 export 'src/routes_services/valhalla_service.dart';
+export 'src/utilities/instruction_icons.dart';
 export 'src/utilities/utils.dart'
     hide GeometriesExtension, OverviewExtension, RoutingTypeExtension;

@@ -48,6 +48,8 @@ mixin OSRMHelper {
           duration: step.duration,
           instruction: instruction,
           location: step.maneuver.location,
+          type: step.maneuver.maneuverType,
+          modifier: step.maneuver.modifier,
         );
         instructions.add(roadInstruction);
       }
@@ -211,7 +213,7 @@ mixin OSRMHelper {
       "rotary_name": step.rotaryName ?? "",
       "lane_instruction": laneInstruction ?? "",
       "modifier": modifierInstruction,
-      "direction": directionFromDegree(step.maneuver.bearingBefore),
+      "direction": directionInstruction,
       "nth": nthWaypoint,
     });
   }
