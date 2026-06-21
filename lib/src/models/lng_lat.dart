@@ -1,9 +1,8 @@
 import 'package:routing_client_dart/src/models/lng_lat_radian.dart';
 import 'package:routing_client_dart/src/models/math_utils.dart';
-import 'package:routing_client_dart/src/models/road.dart';
 import 'package:routing_client_dart/src/utilities/utils.dart';
 
-///  [LngLat] representative class  of geographic point for longitude and latitude
+/// [LngLat] representative class  of geographic point for longitude and latitude
 ///
 /// [lng] : (double) longitude value
 ///
@@ -12,19 +11,17 @@ class LngLat {
   final double lng;
   final double lat;
 
-  LngLat({
-    required this.lng,
-    required this.lat,
-  });
+  LngLat({required this.lng, required this.lat});
 
-  LngLat.fromList({
-    required List<double> lnglat,
-  })  : assert(lnglat.length == 2),
-        lat = lnglat.last,
-        lng = lnglat.first;
+  LngLat.fromList({required List<double> lnglat})
+    : assert(lnglat.length == 2),
+      lat = lnglat.last,
+      lng = lnglat.first;
 
   @override
   String toString() => "$lng,$lat";
+
+  Map<String, dynamic> toMap() => {'lat': lat, 'lon': lng};
 
   @override
   bool operator ==(Object other) {
@@ -35,7 +32,7 @@ class LngLat {
   }
 
   @override
-  int get hashCode => int.parse((lat + lng).toString());
+  int get hashCode => double.parse((lat + lng).toString()).toInt();
 }
 
 extension ExtLngLat on LngLat {
@@ -45,23 +42,20 @@ extension ExtLngLat on LngLat {
     return earthRadius *
         MathUtil.inverseHaversine(
           MathUtil.havDistance(
-              currentRadianLocation.latitude,
-              radianLocation.latitude,
-              (currentRadianLocation - radianLocation).longitude),
+            currentRadianLocation.latitude,
+            radianLocation.latitude,
+            (currentRadianLocation - radianLocation).longitude,
+          ),
         );
   }
+
+  List<double> toList() => [lng, lat];
 }
 
 extension PrvExtLngLat on LngLat {
   LngLat alignWithPrecision({int precision = 5}) {
-    final precisedLngLat = PrivateRoad.decodePoylinesGeometry(
-      PrivateRoad.encode(
-        [this],
-        precision: precision,
-      ),
-      precision: precision,
-    );
-
+    var output = [this].encodeGeometry(precision: precision);
+    final precisedLngLat = output.decodeGeometry(precision: precision);
     return precisedLngLat.first;
   }
 }
