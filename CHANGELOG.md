@@ -1,3 +1,31 @@
+## 1.0.8:
+* fix bug in getRoute alternatives (#30)
+## 1.0.7:
+* remove isolate to support wasm
+* bump dart sdk to 3.7
+## 1.0.6:
+* fix nextInstruction implementation
+* decode geometry in osrm road if geometry as given is string
+## 1.0.5:
+* fix copy instruction in getOSRMRoad #26
+## 1.0.4:
+* improve internally osrm_service,valhalla_service
+## 1.0.3:
+* change the name RoadType to `RoutingType`
+## 1.0.2:
+* export route model 
+## 1.0.1: 
+* forget to export OSRMRequest & ValhallaRequest
+## 1.0.0: add valhalla route API
+* break changes:
+    * replace OSRMManager with RoutingManager
+    * replace getRoad with getRoute
+    * remove buildInstruction ( becone integrated automatically with route object )
+    * replace Road by Route
+    * replace return of OSRM api to OSRMRoad
+* create OSRMService for osrm apis
+* create ValhallaService for valhalla apis
+
 ## 0.5.5: fix bug
 * fix bug related to generate path for getRoute
 ## 0.5.4:
